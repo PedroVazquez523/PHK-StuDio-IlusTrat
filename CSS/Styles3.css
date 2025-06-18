@@ -1,0 +1,385 @@
+/* Estilos base mejorados */
+body, html {
+    color: white;
+    background: url(../IMG/13.jpg) center center/cover fixed no-repeat;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Barra de navegación mejorada */
+nav {
+    max-width: 1000px;
+    width: 95%;
+    margin: 40px auto 0;
+    background-color: rgba(0, 200, 200, 0.25);
+    font-size: 1.1rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+/* Encabezado mejorado */
+header {
+    display: flex;
+    height: 180px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-img {
+    height: 130px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Menú horizontal mejorado */
+.Menu-horizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    position: relative; /* Añadido para menús desplegables */
+}
+
+.Menu-horizontal > li {
+    position: relative; /* Fundamental para menús desplegables */
+}
+
+.Menu-horizontal > li > a {
+    display: block;
+    padding: 22px 28px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.Menu-horizontal > li:hover {
+    background-color: rgba(50, 50, 255, 0.4);
+}
+
+/* Menú vertical - CORRECCIÓN PARA QUE FUNCIONE */
+.Menu-vertical {
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 240px;
+    background-color: rgba(10, 10, 30, 0.9);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    left: 0;
+    top: 100%; /* Posiciona debajo del item padre */
+    z-index: 1000; /* Asegura que aparezca sobre otros elementos */
+}
+
+.Menu-horizontal li:hover .Menu-vertical {
+    display: block;
+}
+
+.Menu-vertical li a {
+    display: block;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.Menu-vertical li:hover {
+    background-color: rgba(0, 200, 200, 0.3);
+}
+
+/* Contenedores mejorados */
+
+
+/* Galería de imágenes mejorada */
+.imagen {
+    background-color: rgba(255, 38, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 12px;
+}
+
+.imagen img {
+    width: 280px;
+    height: auto;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    
+    .logo-img {
+        height: 100px;
+        margin-bottom: 15px;
+    }
+    
+    .Menu-horizontal {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .Menu-vertical {
+        position: static;
+        width: 100%;
+    }
+    
+    .Contenedor_2 {
+        margin-top: 150px;
+    }
+}
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --text-light: #ecf0f1;
+    --transition-speed: 0.4s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.animation-portfolio {
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Encabezado animado */
+.portfolio-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.portfolio-header h2 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    display: inline-block;
+    position: relative;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.portfolio-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.portfolio-header p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-top: 15px;
+    font-weight: 300;
+}
+
+/* Galería interactiva */
+.portfolio-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-speed) cubic-bezier(0.25, 0.8, 0.25, 1);
+    aspect-ratio: 16/9;
+    background-color: #000;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease, filter 0.5s ease;
+    transform-origin: center;
+    filter: brightness(0.9);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(1);
+}
+
+/* Overlay de información */
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 25px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    transform: translateY(100%);
+    transition: transform var(--transition-speed) ease;
+    backdrop-filter: blur(5px);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    transform: translateY(0);
+}
+
+.portfolio-title {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.portfolio-category {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.portfolio-link:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+    border-color: transparent;
+}
+
+/* Efecto de cursor personalizado */
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(52, 152, 219, 0.3);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+.portfolio-item:hover ~ .custom-cursor {
+    background-color: rgba(231, 76, 60, 0.4);
+    width: 80px;
+    height: 80px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .portfolio-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .portfolio-header h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+    }
+    
+    .portfolio-header h2 {
+        font-size: 2rem;
+    }
+    
+    .portfolio-overlay {
+        padding: 20px 15px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-item {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+.portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+.portfolio-item:nth-child(3) { animation-delay: 0.3s; }
+.portfolio-item:nth-child(4) { animation-delay: 0.4s; }
+.portfolio-item:nth-child(5) { animation-delay: 0.5s; }
+.portfolio-item:nth-child(6) { animation-delay: 0.6s; }
+.portfolio-item:nth-child(7) { animation-delay: 0.7s; }

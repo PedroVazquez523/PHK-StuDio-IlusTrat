@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="./CSS/styles-servicios.css"/>
+    <title>Servicios Dinámicos</title>
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Controles de filtrado -->
+        <div class="controles">
+            <div>
+                <label for="buscador">Buscar:</label>
+                <input type="text" id="buscador" placeholder="Escribe para filtrar...">
+            </div>
+            <div>
+                <label for="rangoPrecio">Precio máximo: <span id="valorRango">$500</span></label>
+                <input type="range" id="rangoPrecio" min="100" max="500" step="10" value="500">
+            </div>
+        </div>
+
+        <!-- Tabla de servicios -->
+        <table border="1">
+            <caption>Tabla de Servicios y Comisiones</caption>
+            <thead>
+                <tr>
+                    <th>Servicios</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th id="thPrecio">
+                        <div class="precio-header">
+                            Precio
+                            <span id="iconoOrden">↕</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Animación 2D y 3D</td>
+                    <td>🎬 Creación de videos animados en 2D y 3D para comerciales, redes sociales y entretenimiento.</td>
+                    <td><img src="../IMG/1_3dDis.webp" width="350" height="200"></td>
+                    <td>$250</td>
+                </tr>
+                <tr>
+                    <td>Ilustración y Diseño Gráfico</td>
+                    <td>🎨 Desarrollo de identidades visuales, concept art, storyboards, carteles y material gráfico.</td>
+                    <td><img src="../IMG/2_Boceto_5.jpeg" width="350" height="200"></td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>Anuncios con Publicidad Visual</td>
+                    <td>📢 Producción de contenido animado y visual para campañas publicitarias y redes sociales.</td>
+                    <td><img src="../IMG/3_Publish.jpg" width="350" height="200"></td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>Producción de Motion Graphics</td>
+                    <td>⚡ Creación de animaciones gráficas en movimiento para presentaciones corporativas.</td>
+                    <td><img src="../IMG/4_mouthion.gif" width="350" height="200"></td>
+                    <td>$140</td>
+                </tr>
+                <tr>
+                    <td>Edición y Postproducción</td>
+                    <td>🎞 Ajuste y mejora de videos mediante efectos, corrección de color y composición.</td>
+                    <td><img src="../IMG/5_post.jpg" width="350" height="200"></td>
+                    <td>$300</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Paginación se añadirá dinámicamente -->
+        <div id="paginacion" class="paginacion"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabla = document.querySelector('table');
+            const filas = Array.from(document.querySelectorAll('tbody tr'));
+            const thPrecio = document.getElementById('thPrecio');
+            const iconoOrden = document.getElementById('iconoOrden');
+            const buscador = document.getElementById('buscador');
+            const rangoPrecio = document.getElementById('rangoPrecio');
+            const valorRango = document.getElementById('valorRango');
+            const paginacion = document.getElementById('paginacion');
+            
+            // Configuración inicial
+            let ordenAscendente = true;
+            const itemsPorPagina = 3;
+            let paginaActual = 1;
+            
+            // Mostrar tabla con animación
+            setTimeout(() => tabla.style.opacity = '1', 100);
+            
+            // Función para ordenar por precio
+            function ordenarPorPrecio() {
+                filas.sort((a, b) => {
+                    const precioA = parseFloat(a.querySelector('td:nth-child(4)').textContent.replace('$', ''));
+                    const precioB = parseFloat(b.querySelector('td:nth-child(4)').textContent.replace('$', ''));
+                    return ordenAscendente ? precioA - precioB : precioB - precioA;
+                });
+                
+                // Reinsertar filas ordenadas
+                const tbody = tabla.querySelector('tbody');
+                tbody.innerHTML = '';
+                filas.forEach(fila => tbody.appendChild(fila));
+                
+                // Actualizar icono
+                iconoOrden.textContent = ordenAscendente ? '↑' : '↓';
+                ordenAscendente = !ordenAscendente;
+                
+                // Reaplicar filtros y paginación
+                aplicarFiltros();
+            }
+            
+            // Función para aplicar todos los filtros
+            function aplicarFiltros() {
+                const textoBusqueda = buscador.value.toLowerCase();
+                const maxPrecio = parseInt(rangoPrecio.value);
+                
+                let filasVisibles = 0;
+                
+                filas.forEach((fila, index) => {
+                    const servicio = fila.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                    const descripcion = fila.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    const precio = parseFloat(fila.querySelector('td:nth-child(4)').textContent.replace('$', ''));
+                    
+                    const coincideBusqueda = servicio.includes(textoBusqueda) || descripcion.includes(textoBusqueda);
+                    const dentroDePrecio = precio <= maxPrecio;
+                    
+                    if (coincideBusqueda && dentroDePrecio) {
+                        filasVisibles++;
+                    }
+                    
+                    // Mostrar/ocultar según filtros
+                    fila.style.display = (coincideBusqueda && dentroDePrecio) ? '' : 'none';
+                });
+                
+                // Actualizar paginación
+                actualizarPaginacion(filasVisibles);
+            }
+            
+            // Función para actualizar paginación
+            function actualizarPaginacion(filasVisibles) {
+                const totalPaginas = Math.ceil(filasVisibles / itemsPorPagina);
+                let htmlPaginacion = '';
+                
+                for (let i = 1; i <= totalPaginas; i++) {
+                    htmlPaginacion += `<button class="pagina ${i === paginaActual ? 'activa' : ''}">${i}</button>`;
+                }
+                
+                paginacion.innerHTML = htmlPaginacion;
+                
+                // Mostrar solo los elementos de la página actual
+                let contador = 0;
+                filas.forEach(fila => {
+                    if (fila.style.display !== 'none') {
+                        contador++;
+                        const inicio = (paginaActual - 1) * itemsPorPagina;
+                        const fin = paginaActual * itemsPorPagina;
+                        fila.style.display = (contador > inicio && contador <= fin) ? '' : 'none';
+                    }
+                });
+            }
+            
+            // Eventos
+            thPrecio.addEventListener('click', ordenarPorPrecio);
+            
+            buscador.addEventListener('input', aplicarFiltros);
+            
+            rangoPrecio.addEventListener('input', function() {
+                valorRango.textContent = `$${this.value}`;
+                aplicarFiltros();
+            });
+            
+            document.addEventListener('click', function(e) {
+                // Paginación
+                if (e.target.classList.contains('pagina')) {
+                    paginaActual = parseInt(e.target.textContent);
+                    aplicarFiltros();
+                }
+                
+                // Selección de fila
+                if (e.target.closest('tbody tr')) {
+                    filas.forEach(f => f.classList.remove('seleccionada'));
+                    e.target.closest('tr').classList.add('seleccionada');
+                    
+                    // Opcional: Mostrar información en consola
+                    const servicio = e.target.closest('tr').querySelector('td:nth-child(1)').textContent;
+                    const precio = e.target.closest('tr').querySelector('td:nth-child(4)').textContent;
+                    console.log(`Servicio seleccionado: ${servicio} - Precio: ${precio}`);
+                }
+            });
+            
+            // Inicializar
+            aplicarFiltros();
+        });
+    </script>
+</body>
+</html>

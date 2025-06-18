@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Bienvenida y Multiplicación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #resultado, #imagen {
+            margin-top: 20px;
+        }
+
+        img {
+            width: 200px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: darkblue;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            const nombre = prompt("¿Cual es tu nombre?");
+            const fecha = new Date().toLocaleDateString();
+            document.getElementById("saludo").innerHTML =
+                `Hola, <strong>${nombre}</strong>. Hoy es <strong>${fecha}</strong>.`; 
+            const num1 = parseFloat(prompt("Ingresa el primer número:"));
+            const num2 = parseFloat(prompt("Ingresa el segundo número:"));         
+            function multiplicar(a, b) {
+                return a * b;
+            }
+            const resultado = multiplicar(num1, num2);        
+            document.getElementById("resultado").innerHTML =
+                `El resultado de ${num1} × ${num2} es <strong>${resultado}</strong>.`; 
+            document.getElementById("imagen").innerHTML =
+                `<img src="4.png" alt="¡Buen día!">`;
+        };
+    </script>
+</head>
+<body>
+    <h1>¡Bienvenido!</h1>
+    <div id="saludo"></div>
+    <div id="resultado"></div>
+    <div id="imagen"></div>
+
+    <footer>© 2025 Todos los derechos reservados.</footer>
+</body>
+</html>

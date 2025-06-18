@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenida Elegante</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primario: #6c63ff;
+        --color-secundario: #ff9e3f;
+        --color-texto: #2d3436;
+        --color-fondo: #f8f9fa;
+        --sombra-suave: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position-x: center;
+        font-family: sans-serif;
+        background: url(../IMG/13.jpg);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--color-fondo);
+        font-family: "Montserrat", sans-serif;
+        background-image: linear-gradient(
+          135deg,
+          rgba(108, 99, 255, 0.03) 0%,
+          rgba(255, 158, 63, 0.03) 100%
+        );
+      }
+
+      .contenedor-bienvenida {
+        text-align: center;
+        max-width: 800px;
+        padding: 3rem;
+      }
+
+      .titulo-principal {
+        font-family: "Playfair Display", serif;
+        font-size: 4rem;
+        font-weight: 600;
+        color: var(--color-primario);
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .titulo-principal::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          var(--color-primario),
+          var(--color-secundario)
+        );
+      }
+
+      .mensaje-bienvenida {
+        font-size: 1.8rem;
+        color: var(--color-texto);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        font-weight: 300;
+      }
+
+      .detalle-recomendacion {
+        font-style: italic;
+        color: #636e72;
+        margin-bottom: 3rem;
+        position: relative;
+        display: inline-block;
+        padding: 0 1rem;
+      }
+
+      .detalle-recomendacion::before,
+      .detalle-recomendacion::after {
+        content: "•";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-secundario);
+      }
+
+      .detalle-recomendacion::before {
+        left: -5px;
+      }
+
+      .detalle-recomendacion::after {
+        right: -5px;
+      }
+
+      .fecha {
+        font-size: 1rem;
+        color: #b2bec3;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* Efectos decorativos */
+      .decoracion {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: rgba(108, 99, 255, 0.1);
+        z-index: -1;
+      }
+
+      .decoracion-1 {
+        top: 20%;
+        left: 10%;
+      }
+
+      .decoracion-2 {
+        bottom: 15%;
+        right: 10%;
+        background: rgba(255, 158, 63, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .titulo-principal {
+          font-size: 2.5rem;
+        }
+
+        .mensaje-bienvenida {
+          font-size: 1.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="decoracion decoracion-1"></div>
+    <div class="decoracion decoracion-2"></div>
+
+    <div class="contenedor-bienvenida">
+      <h1 class="titulo-principal">WELCOME!</h1>
+      <p class="mensaje-bienvenida">Bienvenido a nuestra familia</p>
+      <p class="detalle-recomendacion">Se recomienda de 100 años</p>
+      <p class="fecha">Fecha: 6 días</p>
+    </div>
+  </body>
+</html>

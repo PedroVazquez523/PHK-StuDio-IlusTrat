@@ -1,0 +1,220 @@
+/* styleHis.css - Versión con imágenes optimizadas */
+
+/* Reset y estilos base con efecto glassmorphism */
+body, html {
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    color: #ffffff;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../IMG/13.jpg) no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    line-height: 1.8;
+}
+
+/* Contenedor principal con efecto vidrio */
+.gallery-vertical {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    backdrop-filter: blur(8px);
+}
+
+/* Título principal con efecto elegante */
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    margin: 20px auto 0;
+    border-radius: 3px;
+}
+
+/* Items de galería con tamaño de imagen optimizado */
+.gallery-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Tamaño optimizado para imágenes (600px de ancho máximo) */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    display: block;
+    transition: transform 0.5s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    object-fit: cover;
+    object-position: center;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03);
+}
+
+/* Texto con mejor legibilidad */
+.item-text {
+    padding: 25px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.item-text h3 {
+    text-align: center;
+    margin: 0 0 15px 0;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.item-text h3::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+}
+
+.item-text p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Efecto de selección */
+::selection {
+    background: rgba(255, 107, 107, 0.8);
+    color: white;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-item {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.gallery-item:nth-child(1) { animation-delay: 0.2s; }
+.gallery-item:nth-child(2) { animation-delay: 0.4s; }
+.gallery-item:nth-child(3) { animation-delay: 0.6s; }
+
+/* Responsive design */
+@media (max-width: 900px) {
+    .gallery-item {
+        max-width: 90%;
+    }
+    
+    .gallery-item img {
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    .gallery-item {
+        margin-bottom: 30px;
+        border-radius: 14px;
+    }
+    
+    .gallery-item img {
+        max-height: 300px;
+    }
+    
+    .item-text {
+        padding: 20px;
+    }
+    
+    .item-text h3 {
+        font-size: 1.4rem;
+    }
+    
+    .item-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .gallery-vertical {
+        padding: 30px 15px;
+    }
+    
+    .gallery-item img {
+        max-height: 250px;
+    }
+}
+/* Estilos específicos para video VERTICAL (9:16) */
+.gallery-item video {
+    width: 100%;
+    max-width: 330px; /* Ancho similar al de tus imágenes verticales */
+    height: auto;
+    aspect-ratio: 9/16; /* Relación vertical */
+    display: block;
+    margin: 0 auto; /* Centrado horizontal */
+    transition: transform 0.5s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    object-fit: cover;
+    background: #000;
+    border-radius: 8px 8px 0 0; /* Coherencia con las imágenes */
+}
+
+/* Controles personalizados para video vertical */
+video::-webkit-media-controls-panel {
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent) !important;
+}
+
+/* Ajustes responsive (añadir en los media queries existentes) */
+@media (max-width: 768px) {
+    .gallery-item video {
+        max-width: 280px; /* Más estrecho en móviles */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-item video {
+        max-width: 220px;
+    }
+}

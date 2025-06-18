@@ -1,0 +1,200 @@
+/* Estilo mejorado para formulario con efectos modernos */
+
+/* Reset y estilos base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../IMG/13.jpg) no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal con efecto glassmorphism */
+.Formulario, .encabezado {
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+}
+
+.Formulario:hover, .encabezado:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+.Formulario h1, .encabezado h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+.Formulario h1::after, .encabezado h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+}
+
+/* Campos de formulario */
+form {
+    padding: 0 15px;
+}
+
+.usuario {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.usuario input {
+    width: 100%;
+    padding: 12px 5px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.usuario label {
+    position: absolute;
+    top: 12px;
+    left: 5px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.usuario input:focus ~ label,
+.usuario input:valid ~ label {
+    top: -15px;
+    left: 0;
+    color: #4ecdc4;
+    font-size: 14px;
+}
+
+.usuario input:focus {
+    border-bottom-color: #4ecdc4;
+}
+
+/* Efecto de línea animada */
+.usuario span::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    transition: all 0.4s ease;
+}
+
+.usuario input:focus ~ span::before {
+    width: 100%;
+}
+
+/* Botones y enlaces */
+input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(90deg, #2575fc, #6a11cb);
+}
+
+.recordar, .registrarse a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.recordar:hover, .registrarse a:hover {
+    color: #4ecdc4;
+    text-decoration: underline;
+}
+
+.registrarse {
+    margin: 25px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Elementos adicionales */
+.pie {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.regreso {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.2), rgba(0, 0, 255, 0.2));
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.regreso:hover {
+    background: linear-gradient(90deg, rgba(0, 0, 255, 0.3), rgba(0, 255, 255, 0.3));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .Formulario, .encabezado {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .Formulario h1, .encabezado h1 {
+        font-size: 1.5rem;
+    }
+    
+    form {
+        padding: 0;
+    }
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/Reserva.css" />
+    <title>Formulario de Servicios</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formulario = document.getElementById('formulario-servicios');
+            const btnMostrarResumen = document.getElementById('btn-mostrar-resumen');
+            const tablaResumen = document.getElementById('tabla-resumen');
+            const cuerpoTabla = document.getElementById('cuerpo-tabla');
+            
+            // Función para actualizar la tabla dinámica
+            function actualizarTablaResumen() {
+                // Limpiar el cuerpo de la tabla
+                cuerpoTabla.innerHTML = '';
+                
+                // Obtener los valores del formulario
+                const servicio = document.querySelector('input[name="servicio"]:checked').value;
+                const descripcion = document.getElementById('descripcion').value;
+                
+                // Obtener estilos seleccionados
+                const estilosSeleccionados = [];
+                document.querySelectorAll('input[name="estilo"]:checked').forEach(checkbox => {
+                    estilosSeleccionados.push(checkbox.value);
+                });
+                
+                const fuente = document.querySelector('input[name="fuente"]:checked').value;
+                const tamanoDigital = document.getElementById('tamano_digital').value;
+                const tamanoTangible = document.getElementById('tamano_tangible').value;
+                const fechaEntrega = document.getElementById('fecha_entrega').value;
+                const email = document.getElementById('email').value;
+                
+                // Añadir filas a la tabla
+                agregarFilaTabla('Servicio seleccionado', servicio);
+                agregarFilaTabla('Descripción del proyecto', descripcion);
+                
+                if (estilosSeleccionados.length > 0) {
+                    agregarFilaTabla('Estilos seleccionados', estilosSeleccionados.join(', '));
+                } else {
+                    agregarFilaTabla('Estilos seleccionados', 'Ninguno seleccionado');
+                }
+                
+                agregarFilaTabla('Tipo de ilustración', fuente);
+                
+                if (fuente === 'Ilustracion digital') {
+                    agregarFilaTabla('Tamaño y calidad digital', tamanoDigital);
+                } else {
+                    agregarFilaTabla('Tamaño del lienzo tangible', tamanoTangible);
+                }
+                
+                agregarFilaTabla('Fecha de entrega', fechaEntrega);
+                agregarFilaTabla('Email de contacto', email);
+            }
+            
+            // Función auxiliar para agregar una fila a la tabla
+            function agregarFilaTabla(campo, valor) {
+                const fila = document.createElement('tr');
+                
+                const celdaCampo = document.createElement('td');
+                celdaCampo.textContent = campo;
+                celdaCampo.style.fontWeight = '600';
+                celdaCampo.style.color = '#ffb700';
+                
+                const celdaValor = document.createElement('td');
+                celdaValor.textContent = valor || 'No especificado';
+                
+                fila.appendChild(celdaCampo);
+                fila.appendChild(celdaValor);
+                
+                cuerpoTabla.appendChild(fila);
+            }
+            
+            // Evento para mostrar/ocultar la tabla
+            btnMostrarResumen.addEventListener('click', function(e) {
+                e.preventDefault();
+                actualizarTablaResumen();
+                tablaResumen.classList.toggle('mostrar-tabla');
+                
+                // Cambiar el texto del botón
+                if (tablaResumen.classList.contains('mostrar-tabla')) {
+                    btnMostrarResumen.textContent = 'Ocultar Resumen';
+                } else {
+                    btnMostrarResumen.textContent = 'Mostrar Resumen';
+                }
+            });
+            
+            // Actualizar la tabla cuando cambien los valores del formulario
+            formulario.addEventListener('change', actualizarTablaResumen);
+            formulario.addEventListener('input', function(e) {
+                // Actualizar solo para ciertos campos que usan input (no change)
+                if (e.target.name === 'descripcion' || e.target.name === 'email') {
+                    actualizarTablaResumen();
+                }
+            });
+            
+            // Configurar fecha mínima (hoy + 1 mes)
+            const fechaInput = document.getElementById('fecha_entrega');
+            const hoy = new Date();
+            const mesDespues = new Date();
+            mesDespues.setMonth(hoy.getMonth() + 1);
+            
+            const fechaFormateada = mesDespues.toISOString().split('T')[0];
+            fechaInput.setAttribute('min', fechaFormateada);
+            fechaInput.value = fechaFormateada;
+            
+            // Actualizar tabla al cargar la página
+            actualizarTablaResumen();
+        });
+    </script>
+</head>
+<body>
+    <div class="inicio">
+        <h1>¿Qué servicio deseas?</h1>
+        <form method="post" id="formulario-servicios">
+            <div class="estilo">
+                <p>1: Escoje uno de los servicios:</p>
+                    <label> Animación 2D y 3D
+                    <input name="servicio" type="radio" value="Animación 2D y 3D" checked>
+                    </label>
+                    <label> Ilustración y Diseño Gráfico
+                    <input name="servicio" type="radio" value="Ilustración y Diseño Gráfico">
+                    </label>
+                    <label> Anuncios con Publicidad Visual
+                    <input name="servicio" type="radio" value="Anuncios con Publicidad Visual">
+                    </label>
+                    <label> Producción de Motion Graphics
+                    <input name="servicio" type="radio" value="Producción de Motion Graphics">
+                    </label> 
+                    <label> Edición y Postproducción
+                    <input name="servicio" type="radio" value="Edición y Postproducción">
+                    </label>           
+            </div>
+            <div class="estilo">
+                <p> <label>2: Describe lo que deseas que contenga tu orden : <br>
+                    <textarea name="descripcion" id="descripcion" rows="5" cols="58">Procura cubrir todo lo que deseas.</textarea>
+                    </label>
+            </div>
+            <div class="estilo">
+                <p>3: Escoje el estilo de la ilustracion u animacion</p>
+                <label> LineArt:
+                    <input name="estilo" type="checkbox" value="LineArt">
+                    </label>
+                    <label> Cartoon:
+                            <input name="estilo" type="checkbox" value="Cartoon">
+                    </label>
+                    <label> Manga:
+                            <input name="estilo" type="checkbox" value="Manga">
+                    </label>
+                    <label> Anime oriental:
+                            <input name="estilo" type="checkbox" value="Anime oriental">
+                    </label>
+                    <label> Anime americano:
+                            <input name="estilo" type="checkbox" value="Anime americano">
+                    </label>
+            </div>
+            <div class="estilo">
+                <p>4: Escoje la fuente de tu ilustracion</p>
+                <label> Ilustracion tangible:
+                    <input name="fuente" type="radio" value="Ilustracion tangible">
+                    </label>
+                    <label> Ilustracion dijital:
+                            <input name="fuente" type="radio" value="Ilustracion digital" checked>
+                    </label>
+            </div> <br>
+            <div class="estilo">
+                <label>5: En caso de ser dijital escoje el tamaño y la calidad:
+                    <select name="tamano_digital" id="tamano_digital">
+                    <option value="500x500 px, 72 ppp, JPEG (Calidad estandar)" selected> 500x500 px, 72 ppp, JPEG (Calidad estandar)</option>
+                    <option value="800x600 px, 150 ppp, PNG">800x600 px, 150 ppp, PNG</option>
+                    <option value="1024x768 px, 72 ppp, JPEG">1024x768 px, 72 ppp, JPEG</option>
+                    <option value="1200x1200 px, 150 ppp, PNG (Calidad alta)">1200x1200 px, 150 ppp, PNG (Calidad alta)</option>
+                    <option value="1600x900 px, 72 ppp, JPEG (Calidad muy alta)">1600x900 px, 72 ppp, JPEG (Calidad muy alta)</option>
+                    </select>
+                    </label>
+            </div>
+            <div class="estilo"> <br>
+                <label>6: En caso de ser tangible escoje el tamaño del lienzo:
+                    <select name="tamano_tangible" id="tamano_tangible">
+                    <option value="500 x 500 px." selected> 500 x 500 px.</option>
+                    <option value="2000 x 2000 px.">2000 x 2000 px.</option>
+                    <option value="4000 x 4000 px.">4000 x 4000 px.</option>
+                    <option value="8000 x 8000 px.">8000 x 8000 px.</option>
+                    <option value="16000 x 16000 px.">16000 x 16000 px.</option>
+                    </select>
+                    </label>
+            </div><br>
+            <div class="estilo">
+                <label>7: Fecha de entrega no menor a un mes:
+                    <input type="date" name="fecha_entrega" id="fecha_entrega"/>
+                    </label>
+            </div>
+            <div class="estilo"> <br>
+                <label>8: Email para contactarnos contigo y dar seguimiento al proyecto:
+                    <input type="email" name="email" id="email" placeholder="nombredominio.com" required/>
+                    </label>
+            </div>
+            <div class="estilo"> <br>
+                <input type="submit" value="enviar"> <br> <br>
+                <input type="reset" value="Borrar">
+            </div>
+        </form>
+        
+        <button id="btn-mostrar-resumen">Mostrar Resumen</button>
+        
+        <table class="tabla-resumen" id="tabla-resumen">
+            <thead>
+                <tr>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla">
+                <!-- Aquí se insertarán los datos dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

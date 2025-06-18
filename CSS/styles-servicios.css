@@ -1,0 +1,322 @@
+/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background: url(../IMG/13.jpg) center center/cover fixed no-repeat;
+    margin: 0;
+}
+
+/* Estilos generales */
+:root {
+  --color-primario: #4361ee;
+  --color-secundario: #3f37c9;
+  --color-acento: #4cc9f0;
+  --color-texto: #2b2d42;
+  --color-fondo: #f8f9fa;
+  --color-borde: #e9ecef;
+  --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --sombra-intensa: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --transicion-rapida: all 0.2s ease;
+  --transicion-media: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+
+/* Contenedor principal */
+.contenedor {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--sombra-intensa);
+  overflow: hidden;
+  position: relative;
+}
+
+.contenedor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, var(--color-primario), var(--color-acento));
+}
+
+/* Controles de filtrado */
+.controles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  box-shadow: var(--sombra-suave);
+}
+
+.controles > div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primario);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"] {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transicion-rapida);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: var(--color-borde);
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  transition: var(--transicion-rapida);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primario);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transicion-rapida);
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  background: var(--color-secundario);
+}
+
+#valorRango {
+  font-weight: bold;
+  color: var(--color-secundario);
+  margin-left: 0.5rem;
+}
+
+/* Estilos de la tabla */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+}
+
+caption {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  color: var(--color-texto);
+  text-align: left;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+caption::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primario), var(--color-acento));
+}
+
+th, td {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-borde);
+  transition: var(--transicion-media);
+}
+
+th {
+  background-color: var(--color-primario);
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+th:hover {
+  background-color: var(--color-secundario);
+}
+
+.precio-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#iconoOrden {
+  font-size: 0.9rem;
+  transition: var(--transicion-rapida);
+}
+
+tr {
+  transition: var(--transicion-media);
+}
+
+tr:not(:last-child) td {
+  border-bottom: 1px solid var(--color-borde);
+}
+
+tr:hover {
+  background-color: rgba(76, 201, 240, 0.05);
+  transform: translateX(5px);
+}
+
+tr.seleccionada {
+  background-color: rgba(67, 97, 238, 0.1) !important;
+  position: relative;
+}
+
+tr.seleccionada::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--color-primario);
+}
+
+/* Estilos para imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicion-media);
+}
+
+tr:hover img {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Paginación */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.paginacion button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--color-texto);
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicion-rapida);
+}
+
+.paginacion button:hover {
+  background: rgba(67, 97, 238, 0.1);
+  color: var(--color-primario);
+}
+
+.paginacion button.activa {
+  background: var(--color-primario);
+  color: white;
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+/* Efectos de hover para elementos interactivos */
+button, [type="button"], [type="submit"], [type="reset"] {
+  cursor: pointer;
+  transition: var(--transicion-rapida);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 8px;
+  }
+  
+  th, td {
+    padding: 0.75rem;
+  }
+  
+  .controles {
+    grid-template-columns: 1fr;
+  }
+  
+  caption {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .paginacion {
+    flex-wrap: wrap;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+table {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Efecto de carga */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+  animation: shimmer 1.5s infinite linear;
+  background: linear-gradient(to right, #f6f7f8 8%, #e9ecef 18%, #f6f7f8 33%);
+  background-size: 1000px 100%;
+}
